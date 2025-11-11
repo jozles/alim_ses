@@ -9,7 +9,7 @@ uint8_t led = LED;
 
 uint16_t volts=0;
 uint16_t vAdj=14;
-float vFactor=490;
+float vFactor=500;
 uint16_t aAdj=0;
 uint16_t aFactor=7.96;
 uint16_t amps=0;
