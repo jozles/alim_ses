@@ -13,6 +13,12 @@
 #define ON HIGH
 #define OFF LOW
 
+#define SPI_SPEED 4000000 //4000000 // ADUM low power config
+
+#define SPI_INIT  SPI.beginTransaction(SPISettings(SPI_SPEED,MSBFIRST,SPI_MODE0));
+#define SPI_START SPI.begin();
+#define SPI_OFF   SPI.end();bitClear(DDR_MOSI,MOSI_PIN);bitClear(DDR_CLK,CLK_PIN); //digitalWrite(CSV_PIN,LOW);
+
 #define CLKPIN     5
 #define MISOPIN    4
 #define MOSIPIN    3

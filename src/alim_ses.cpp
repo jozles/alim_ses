@@ -29,7 +29,7 @@ void setup() {
 
   Serial.begin(115200);
   
-  Serial.print("+start SPI ");delay(10);
+  Serial.print("\n+start SPI ");delay(10);
   SPI_START
   SPI_INIT
   Serial.println(" done ");delay(10);
@@ -40,6 +40,9 @@ void setup() {
  
   Serial.print("+start CS6550 ");delay(10);
   cs5550_init();
+  while(1){}
+  
+  cs5550_calib();
   Serial.println(" done ");delay(10);
 
 }

@@ -77,19 +77,9 @@ void menu()
   Serial.println("d display ; k cont single ; c conversion ; s stop ; f filter ; o instant ; r registers ; m clear mini/maxi");Serial.print("H shunt ; C config ; S status ; M mask ; G Gain1 ; F Gain2 ; O Offset1 ; P Offset2 ; Y Cycles ; v value ");
 }
 
-void cs5550_init(){
-
-  CSM_INIT
-  CSM_HIGH
-  INT_INIT
-//cs5550ShowReg();
-
-  cs5550RegWrite(CSM_PIN,CONFIG,0x000002);     // gain 10 ; clk divide/2
-  cs5550RegWrite(CSM_PIN,CYCCOUNT,T250MS);
-  cs5550RegWrite(CSM_PIN,CONTROL,NOCPU);
-  
-  cs5550ShowReg();
-
+void cs5550_calib()
+{
+   
   /* CALIBRATION */
 
   Serial.println("calibration : ");
@@ -111,6 +101,24 @@ void cs5550_init(){
   cs5550RegWrite(CSM_PIN,MASK,0x000000);
 
   cs5550ShowReg();  //menu();
+}
+
+void cs5550_init(){
+
+  //CSM_INIT
+  //CSM_HIGH
+  //INT_INIT
+  pinMode(CSM_PIN,OUTPUT);
+  digitalWrite(CSM_PIN,HIGH);
+
+  //cs5550ShowReg();
+
+  cs5550RegWrite(CSM_PIN,CONFIG,0x000002);     // gain 10 ; clk divide/2
+  cs5550RegWrite(CSM_PIN,CYCCOUNT,T250MS);
+  cs5550RegWrite(CSM_PIN,CONTROL,NOCPU);
+  
+  cs5550ShowReg();
+ 
 }
 
 uint32_t cal32(byte* data)
@@ -303,7 +311,8 @@ void cs5550Command(uint8_t ss, const uint8_t cd)
 
 void cs5550ShowReg()
 {
-  Serial.print("disp/conv/filt/gain5;shunt;kdly ");Serial.print(disp);Serial.print(conv);Serial.print(filt);Serial.print(gain5);Serial.print(";");Serial.print(shunt);Serial.print(";");Serial.println(kdly);
+  Serial.print("disp/conv/filt/gain5;shunt;kdly ");Serial.print(disp);Serial.print(conv);Serial.print(filt);Serial.print(gain5);
+  Serial.print(";");Serial.print(shunt);Serial.print(";");Serial.println(kdly);
   for(int r=0;r<NBREG;r++){
     Serial.print(r);Serial.print(" ");
     if(r<10){Serial.print(' ');}

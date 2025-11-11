@@ -49,9 +49,10 @@ void mcp4901_init()
   CSV_HIGH
   CSA_HIGH
   
-  uint16_t val=0; //0x0db0;      //x0ffe;
-  outVolts(val);
+  uint16_t val=65;outVolts(val);
+  val=10;outAmps(val); 
 
+  /*
   Serial.print("(");Serial.print(vAdj);
   Serial.print(") aAdj Volts ? ");
   vAdj=getValue();
@@ -59,7 +60,7 @@ void mcp4901_init()
   Serial.print("  (");Serial.print(aAdj);
   Serial.print(") Adj Amps ? ");
   aAdj=getValue();
-
+*/
 }
 
 void ramp(char what,uint16_t valB,uint16_t valE,uint16_t stepsN,uint32_t dly)

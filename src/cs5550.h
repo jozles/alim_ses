@@ -11,10 +11,11 @@ enum {FAUX, VRAI};
 #define PORT_CSM  PORTC
 #define DDR_CSM   DDRC
 
-#define CSM_INIT   bitSet(DDR_CSM,CSM_PIN); //pinMode(CSA_PIN,OUTPUT);
+/*#define CSM_INIT   bitSet(DDR_CSM,CSM_PIN); //pinMode(CSA_PIN,OUTPUT);
 #define CSM_OFF    bitClear(DDR_CSM,CSM_PIN); //pinMode(CSA_PIN,INPUT);
 #define CSM_HIGH   bitSet(PORT_CSM,CSM_PIN); //digitalWrite(CSA_PIN,HIGH);
 #define CSM_LOW    bitClear(PORT_CSM,CSM_PIN); //digitalWrite(CSA_PIN,LOW);
+*/
 #define INT_INIT   pinMode(INT,INPUT_PULLUP);
 
 /* CS5550 commands */
@@ -95,11 +96,12 @@ enum {FAUX, VRAI};
 
 /* SPI select pins */
 
-#define CSM_PIN    2          // pin pour CS du CS6550
+#define CSM_PIN    A2          // pin pour CS du CS6550
 #define INT 9       // cs5550 INT pin
 
 
 void cs5550_init();
+void cs5550_calib();
 void getValues();
 
 
