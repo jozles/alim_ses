@@ -4,6 +4,8 @@
 #include "Arduino.h"
 
 #define LED  4          // pin pour Led (13 pris par le clk du SPI)
+#define PORT_LED PORTD
+#define BIT_LED 4
 #define ONLED HIGH
 #define OFFLED LOW
 

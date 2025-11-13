@@ -23,6 +23,15 @@ if (millis() > (tmpBlink + perBlink)) {
   }
 }
 
+void dynBlk(){
+  if((millis()-tmpBlink)>1000){     // && bitRead(PORT_LED,BIT_LED)==0){
+    bitSet(PORT_LED,BIT_LED);
+    tmpBlink=millis();}
+  if((millis()-tmpBlink)>100 && bitRead(PORT_LED,BIT_LED)!=0){
+    bitClear(PORT_LED,BIT_LED);
+    tmpBlink=millis();}
+}
+
 void blink(uint8_t num,uint32_t dly)
 {
   if(num!=0){
@@ -33,6 +42,18 @@ void blink(uint8_t num,uint32_t dly)
 void blink(uint8_t num)
 {
   blink(num,10);
+}
+
+char inch(const char* data)
+{
+  if(data!=NULL){Serial.print(data);}
+  char a=' ';
+  while(a==' '){
+    if (Serial.available()) {a=Serial.read();}
+    else dynBlk();
+  }
+  Serial.print(a);Serial.println();
+  return a;
 }
 
 void spi_Write(byte* data,char port,uint8_t pin)
@@ -71,7 +92,7 @@ uint16_t getValue()
   uint16_t v=0;
   char c='\0';
   while(c!=0x1b){
-    while((c<'0' || c>'9') && c!=0x1b){c=getCh();}
+    while((c<'0' || c>'9') && c!=0x1b){c=inCh();}
     if(c!=0x1b){Serial.print(c);c-='0';v*=10;v+=c;}
   }
   return v;
@@ -83,7 +104,7 @@ float getFloatValue()
   char c='\0';
   uint8_t decimal=0;
   while(c!=0x1b){
-    while(((c<'0' || c>'9') && c!='.') && c!=0x1b){c=getCh();}
+    while(((c<'0' || c>'9') && c!='.') && c!=0x1b){c=inCh();}
     if(c!=0x1b){
       Serial.print(c);
       if(c=='.' && decimal==0){decimal=1;c='\0';}
@@ -136,3 +157,6 @@ void printFloat(float val)
       Serial.print(buff);
       Serial.print(" ");
 }
+
+
+

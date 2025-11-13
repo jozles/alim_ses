@@ -83,15 +83,15 @@ void cs5550_calib()
   /* CALIBRATION */
 
   Serial.println("calibration : ");
-  const char* t0={"input g when shunt shortened ; d default "};
-  a=inch(t0);
+  //const char* t0={"input g when shunt shortened ; d default "};
+  a=inch("input g when shunt shortened ; d default ");
   if(a=='g'){calibrateOffset();}
   if(a=='d'){
     cs5550RegWrite(CSM_PIN, AIN1OFF, cal1Off);
     cs5550RegWrite(CSM_PIN, AIN2OFF, cal2Off);
     }
-  const char* t1="input d to calibrate gain ; any other key for default ";
-  a=inch(t1);
+  //const char* t1="input d to calibrate gain ; any other key for default ";
+  a=inch("input d to calibrate gain ; any other key for default ");
   if(a=='g'){calibrateGain();}
   if(a=='d'){cs5550RegWrite(CSM_PIN, AIN1GAIN, cal1Gain);}
 
@@ -426,7 +426,7 @@ bool bitTst(byte* v1,uint32_t v2)
 }
 */
 
-char inch(const char* data)
+/*char inch(const char* data)
 {
   Serial.print(data);
   char a=' ';
@@ -435,7 +435,7 @@ char inch(const char* data)
   }
   Serial.print(a);Serial.println();
   return a;
-}
+}*/
 
 uint32_t uint32conv(byte* data)
 {

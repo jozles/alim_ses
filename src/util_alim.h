@@ -2,13 +2,16 @@
 #define _UTILALIM_H
 
 #include "Arduino.h"
+#include "alim_ses.h"
 
 void spi_Write(byte* data,char port,uint8_t pin);
 void dyn_led();
+void dynBlk();
 void blink(uint8_t num,uint32_t dly);
 void blink(uint8_t num);
 char getCh();
 char peekCh();
+char inch(const char* data);
 uint16_t getValue();
 float getFloatValue();
 void printFloat(float val);

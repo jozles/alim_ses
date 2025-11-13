@@ -53,10 +53,11 @@ void loop()
   delay(1000);
   float bid;
 
-  Serial.print("\n\n\rquoi (F fixe / Vv rampe V / Aa rampe A)?");
+  //Serial.print("\n\n\rquoi (F fixe / Vv rampe V / Aa rampe A)?");
 
   char quoi='\0';
-  quoi=getCh();Serial.println(quoi);
+  quoi=inch("\n\n\rquoi (F fixe / Vv rampe V / Aa rampe A)?");
+  Serial.println(quoi);
 
   switch(quoi){
     
